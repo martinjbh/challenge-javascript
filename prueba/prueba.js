@@ -251,31 +251,31 @@ OrderedLinkedList.prototype.print = function () {
 // > LL.print()
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
-OrderedLinkedList.prototype.add = function (val) {
-    var node = new Node(val)
-    if (this.head === null) {
-        this.head = node
-    }
-    else {
-        let current = this.head
-        while (current.next && val > current.value) {
-            current = current.next
-        }
-        if (!current.next) {
-            current.next = node
-        } else {
-            node.next = current.next
-            current.next = node
-        }
-    }
-    return node
-}
+// OrderedLinkedList.prototype.add = function (val) {
+//     var node = new Node(val)
+//     if (this.head === null) {
+//         this.head = node
+//     }
+//     else {
+//         let current = this.head
+//         while (current.next && val > current.value) {
+//             current = current.next
+//         }
+//         if (!current.next) {
+//             current.next = node
+//         } else {
+//             node.next = current.next
+//             current.next = node
+//         }
+//     }
+//     return node
+// }
 
-var ll = new OrderedLinkedList()
+// var ll = new OrderedLinkedList()
 // xit("debe agregar nodos a la OrderedLinkedList", function () {
-ll.add(1)
-ll.add(5)
-ll.add(4)
+// ll.add(1)
+// ll.add(5)
+// ll.add(4)
 // ll.add(7)
 //  ll.add(2)
 // ll.add(3)
@@ -366,3 +366,18 @@ ll.add(4)
 
 
 // console.log(primalityTest(3))//true;
+
+
+function invertirDigitos(numero)
+{ 
+  var invertido = 0
+  var resto = numero
+  do {
+    invertido = invertido * 10 + (resto % 10)
+    resto =resto / 10
+  } while ( resto > 0 )
+  return invertido
+}
+
+console.log(invertirDigitos(123456))
+console.log(invertirDigitos(321))

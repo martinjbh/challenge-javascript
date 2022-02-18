@@ -72,10 +72,69 @@ function exponencial(exp) {
 // haciendo los movimientos SUR->ESTE->NORTE
 // Aclaraciones: el segundo parametro que recibe la funcion ('direccion') puede ser pasado vacio (null)
 
-function direcciones(laberinto) {
-
-
+let lab2 = {
+    N: 'pared', S: 'pared', E: {
+        N: 'pared', S: {
+            N: 'pared', S: 'pared', E: 'pared', O: {
+                N: {
+                    N: 'pared', S: 'pared', E: 'pared', O: {
+                        N: 'pared', S: {
+                            N: 'pared', S: 'pared', E: 'destino', O: 'pared'
+                        }, E: 'pared', O: 'pared'
+                    }
+                }, S: 'pared', E: 'pared', O: 'pared'
+            }
+        }, E: 'pared', O: 'pared'
+    }, O: 'pared'
 }
+let lab3 = {
+    N: 'pared', S: 'pared', E: {
+        N: 'pared', S: {
+            N: 'pared', S: 'pared', E: 'pared', O: {
+                N: 'pared', S: {
+                    N: 'pared', S: 'pared', E: {
+                        N: 'pared', S: 'pared', E: 'destino', O: 'pared'
+                    }, O: 'pared'
+                }, E: 'pared', O: 'pared'
+            }
+        }, E: 'pared', O: 'pared'
+    }, O: 'pared'
+}
+
+let lab1 = {
+    N: 'pared',
+    S: {
+        N: 'pared', S: 'pared', E: 'pared', O: {
+            N: 'pared', S: 'destino', E: 'pared', O: 'pared'
+        }
+    },
+    E: 'pared',
+    O: 'pared'
+}
+function direcciones(laberinto) {
+    var strg = ''
+    if (!laberinto) return ''
+    for (clave in laberinto) {
+        if (laberinto[clave] == "destino") return clave + strg
+        if (typeof (laberinto[clave]) == "object")
+            strg = clave + direcciones(laberinto[clave])
+    }
+    return strg
+}
+
+// it("Si no se le pasa un laberinto debe retornar ''", function () {
+console.log(direcciones())//('');
+
+//it("Si se le pasa un laberinto sin destino debe retornar ''", function () {
+// console.log(direcciones({ N: 'pared', S: 'pared', E: 'pared', O: 'pared' }))//('');
+
+//it("Debe encontrar el destino dentro del laberinto y retornar los movimientos", function () {
+
+console.log(direcciones(lab1)) //('SOS');
+// console.log(direcciones(lab2)) //('ESONOSE');
+// console.log(direcciones(lab3)) //('ESOSEE');
+
+
 // EJERCICIO 3
 // Crea la funcion 'deepEqualArrays':
 // Dado que las comparaciones en javascript aveces son un problema como con el siguiente ejemplo:
@@ -282,11 +341,12 @@ const cbs2 = [
 ];
 
 function multiCallbacks(cbs1, cbs2) {
-   return cbs1(1)
+
 }
-arr = []
-multiCallbacks([...cbs1], [...cbs2])
-console.log(arr.length)//(4)
+
+
+
+// console.log(arr.length)//(4)
 
 
 // ----- BST -----
@@ -301,7 +361,6 @@ console.log(arr.length)//(4)
 //  / \
 // 5   9
 // resultado:[5,8,9,32,64]
-
 BinarySearchTree.prototype.toArray = function () {
     var arry = []
     current = this.left
@@ -404,7 +463,13 @@ function quickSort(array) {
 // < 32859
 
 function reverse(num) {
-
+    var invertido = 0
+    var resto = num
+    do {
+        invertido = invertido * 10 + (resto % 10)
+        resto = resto / 10
+    } while (resto > 0)
+    return invertido
 }
 // la grandiosa resolucion de Wilson!!!
 // declaran una variable donde 
