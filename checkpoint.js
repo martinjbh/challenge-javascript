@@ -150,24 +150,20 @@ OrderedLinkedList.prototype.add = function (val) {
     if (this.head === null) {
         this.head = node
     }
-    var current = this.head
-    if (current.value > node.value) {
-        var aux = this.head
-        var previa = aux
-        aux = aux.next
-        if (aux === null) {
-            previa.next = node
-        } else {
-            aux.next = node
+    else {
+        let current = this.head
+        while (current.next && val > current.value) {
+            current = current.next
         }
-
-
+        if (!current.next) {
+            current.next = node
+        } else {
+            node.next = current.next
+            current.next = node
+        }
     }
-   return this
+    return node
 }
-
-
-
 // EJERCICIO 5
 // Crea el metodo 'removeHigher' que deve devolver el valor mas alto de la linked list 
 // removiendo su nodo corresponidente:
@@ -182,10 +178,26 @@ OrderedLinkedList.prototype.add = function (val) {
 // < 1
 // > LL.removeHigher()
 // < null
-
 OrderedLinkedList.prototype.removeHigher = function () {
+    let current = this.head
+    if (this.head === null) return null
+    if (current.next && current.value > current.next.value) {
+        var aux = current.value
+        this.head = current.next
+    } else {
+        aux = 1
+        this.head = null
+    }
+    return aux
 }
-
+// let ll = new OrderedLinkedList()
+// ll.head = new Node(5)
+// ll.head.next = new Node(4)
+// ll.head.next.next = new Node(1)
+// console.log(ll.removeHigher())//(5)
+// console.log(ll.removeHigher())//4
+// console.log(ll.removeHigher())//1
+// console.log(ll.head)//(null)
 
 // EJERCICIO 6
 // Crea el metodo 'removeLower' que deve devolver el valor mas bajo de la linked list 
@@ -203,8 +215,33 @@ OrderedLinkedList.prototype.removeHigher = function () {
 // < null
 
 OrderedLinkedList.prototype.removeLower = function () {
+    if (this.head === null) return null
 
+    let current = this.head
+    while (current.next) {
+        var anterior = current
+        current = current.next
+        var valor = current.value
+    }
+
+    if (this.head.next === null) {
+        let val = this.head.value
+        this.head = null
+        return val
+    }
+    anterior.next = null
+
+    return valor
 }
+
+// let ll = new OrderedLinkedList()
+// ll.head = new Node(5)
+// ll.head.next = new Node(4)
+// ll.head.next.next = new Node(1)
+// console.log(ll.removeLower())//(1)
+// console.log(ll.removeLower())//(4)
+// console.log(ll.removeLower())//(5)
+// console.log(ll.head)//(null)
 
 
 
@@ -234,10 +271,23 @@ OrderedLinkedList.prototype.removeLower = function () {
 //   ];
 // > multiCallbacks(cbs1, cbs2);
 // < ["2-1", "1-1", "1-2", "2-2"];
+let arr = []
+const cbs1 = [
+    { cb: () => (arr.push('1-1'), '1-1'), time: 2 },
+    { cb: () => (arr.push('1-2'), '1-2'), time: 3 }
+];
+const cbs2 = [
+    { cb: () => (arr.push('2-1'), '2-1'), time: 1 },
+    { cb: () => (arr.push('2-2'), '2-2'), time: 4 }
+];
 
 function multiCallbacks(cbs1, cbs2) {
-
+   return cbs1(1)
 }
+arr = []
+multiCallbacks([...cbs1], [...cbs2])
+console.log(arr.length)//(4)
+
 
 // ----- BST -----
 
@@ -278,11 +328,11 @@ BinarySearchTree.prototype.toArray = function () {
     })
     return ress.sort((a, b) => a - b)
 }
-console.log()
-const BST = new BinarySearchTree(32)
-const arr = [8, 64, 5, 9];
-arr.forEach(e => BST.insert(e))
-console.log(BST.toArray())
+// console.log()
+// const BST = new BinarySearchTree(32)
+// const arr = [8, 64, 5, 9];
+// arr.forEach(e => BST.insert(e))
+// console.log(BST.toArray())
 
 // ----- Algoritmos -----
 

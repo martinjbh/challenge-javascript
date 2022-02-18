@@ -256,14 +256,19 @@ OrderedLinkedList.prototype.add = function (val) {
     if (this.head === null) {
         this.head = node
     }
-    var cabeza = this.head
-    var aux = this.head
-    while (aux.value < node.value) {
-        let siguiente=aux
-        aux =siguiente.next
+    else {
+        let current = this.head
+        while (current.next && val > current.value) {
+            current = current.next
+        }
+        if (!current.next) {
+            current.next = node
+        } else {
+            node.next = current.next
+            current.next = node
+        }
     }
-
-    console.log(JSON.stringify(this))
+    return node
 }
 
 var ll = new OrderedLinkedList()
