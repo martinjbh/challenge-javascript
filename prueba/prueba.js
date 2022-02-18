@@ -374,7 +374,7 @@ function invertirDigitos(numero)
   var resto = numero
   do {
     invertido = invertido * 10 + (resto % 10)
-    resto =resto / 10
+    resto = Math.floor(resto / 10)
   } while ( resto > 0 )
   return invertido
 }

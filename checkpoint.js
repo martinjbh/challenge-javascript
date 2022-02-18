@@ -330,19 +330,35 @@ OrderedLinkedList.prototype.removeLower = function () {
 //   ];
 // > multiCallbacks(cbs1, cbs2);
 // < ["2-1", "1-1", "1-2", "2-2"];
-let arr = []
-const cbs1 = [
-    { cb: () => (arr.push('1-1'), '1-1'), time: 2 },
-    { cb: () => (arr.push('1-2'), '1-2'), time: 3 }
-];
-const cbs2 = [
-    { cb: () => (arr.push('2-1'), '2-1'), time: 1 },
-    { cb: () => (arr.push('2-2'), '2-2'), time: 4 }
-];
 
-function multiCallbacks(cbs1, cbs2) {
+function multiCallbacks(cbs1, cbs2,) {
+    var arr = []
+    var respuesta = []
+    for (let i = 0; i < cbs1.length; i++) {
+        arr.push(cbs1[i])
+        arr.push(cbs2[i])
+    }
+    arr.sort((a, b) => a.time - b.time)
+    arr.map((val, i) => {
+        respuesta.push(val.cb())
 
+    })
+    return respuesta
 }
+
+
+// var arr = []
+// let callbacks = cbs1.concat(cbs2);
+
+// let max = Math.max(...callbacks.map((ele) => ele.time));
+
+// for (let i = 1; i <= max; i++) {
+//     let callback = callbacks.find((callback) => callback.time === i);
+//     arr.push(callback.cb());
+// }
+
+// return arr;
+// }
 
 
 
@@ -467,7 +483,7 @@ function reverse(num) {
     var resto = num
     do {
         invertido = invertido * 10 + (resto % 10)
-        resto = resto / 10
+        resto = Math.floor(resto / 10)
     } while (resto > 0)
     return invertido
 }
