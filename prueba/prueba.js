@@ -251,36 +251,43 @@ OrderedLinkedList.prototype.print = function () {
 // > LL.print()
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
-// OrderedLinkedList.prototype.add = function (val) {
-//     var node = new Node(val)
-//     if (this.head === null) {
-//         this.head = node
-//     }
-//     else {
-//         let current = this.head
-//         while (current.next && val > current.value) {
-//             current = current.next
-//         }
-//         if (!current.next) {
-//             current.next = node
-//         } else {
-//             node.next = current.next
-//             current.next = node
-//         }
-//     }
-//     return node
-// }
+OrderedLinkedList.prototype.add = function (val) {
+    var cabeza = this.head
+    var node = new Node(val)
+    if (cabeza === null) {
+        this.head = node
+    }
+    else if (cabeza.value < val) {
+        node.next = cabeza
+        this.head = node
+    }
+    else {
+        while (cabeza.value > val && cabeza.next !== null) {
+            var ExCabeza = cabeza
+            cabeza = cabeza.next
+        }
+        if (cabeza.value > val) {
+            node.next = cabeza.next
+            cabeza.next = node
+        }
+        if (cabeza.value < val) {
+            node.next = cabeza
+            ExCabeza.next = node
+        }
+        return node
+    }
 
-// var ll = new OrderedLinkedList()
-// xit("debe agregar nodos a la OrderedLinkedList", function () {
-// ll.add(1)
-// ll.add(5)
-// ll.add(4)
-// ll.add(7)
-//  ll.add(2)
-// ll.add(3)
-// ll.add(2)
-// console.log(ll)
+}// < 'head --> 5--> 3 --> 1 --> null'
+
+
+var ll = new OrderedLinkedList()
+
+ll.add(4)
+ll.add(5)
+ll.add(3)
+ll.add(1)
+
+console.log(JSON.stringify(ll))
 // //xit("debe agregar nodos a la OrderedLinkedList, despues de los nodos mayores al argumento", function () {
 // ll.add(1)
 // var ll2 = new OrderedLinkedList()
@@ -295,8 +302,6 @@ OrderedLinkedList.prototype.print = function () {
 // ll2.head.next = new Node(4)
 // ll2.head.next.next = new Node(1)
 // console.log(ll) //(ll2)
-
-
 
 //7) EJERCICIO 7/////////////////////////////////////////////////////////////////////////////////////
 // Implementar la funcion multiCallbacks:
@@ -368,16 +373,16 @@ OrderedLinkedList.prototype.print = function () {
 // console.log(primalityTest(3))//true;
 
 
-function invertirDigitos(numero)
-{ 
-  var invertido = 0
-  var resto = numero
-  do {
-    invertido = invertido * 10 + (resto % 10)
-    resto = Math.floor(resto / 10)
-  } while ( resto > 0 )
-  return invertido
-}
+// function invertirDigitos(numero)
+// {
+//   var invertido = 0
+//   var resto = numero
+//   do {
+//     invertido = invertido * 10 + (resto % 10)
+//     resto = Math.floor(resto / 10)
+//   } while ( resto > 0 )
+//   return invertido
+// }
 
-console.log(invertirDigitos(123456))
-console.log(invertirDigitos(321))
+// console.log(invertirDigitos(123456))
+// console.log(invertirDigitos(321))

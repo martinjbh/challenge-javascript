@@ -94,7 +94,7 @@ describe('Practica del Checkpoint M1', function () {
         it('Debe hacer comparaciones superficiales', function () {
             expect(deepEqualArrays(
                 [0, 1, 2],
-                [0, 1, 2]
+                [0, 2, 2]
             )).to.be.true;
         })
         it('Debe comparar el tipo de cada elemento tambien', function () {
